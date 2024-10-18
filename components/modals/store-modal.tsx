@@ -1,16 +1,19 @@
 'use client'
 
-import { useStoreModal } from "@/hooks/use-store-modal"
-import Modal from "../ui/modal"
+import { useStoreModal } from "@/hooks/use-store-modal";
+import Modal from "../ui/modal";
 
 export const StoreModal = () => {
-    const storeModal = useStoreModal();
-    <Modal         
-    title="Buat Store"
-    description="tambahkan store untuk membuat product dan kategori"
-    isOpen={storeModal.isOpen}
-    onClose={storeModal.onClose}
+  const storeModal = useStoreModal();
+
+  return (
+    <Modal
+      title="Buat Store"
+      description="Tambahkan store untuk membuat produk dan kategori"
+      isOpen={storeModal.isOpen}
+      onClose={storeModal.onClose}
     >
-        Store From
+      Store Form
     </Modal>
-}
+  );
+};
