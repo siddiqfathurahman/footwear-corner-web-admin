@@ -1,4 +1,5 @@
-'use client'
+// store-modal.tsx
+'use client';  // Deklarasikan bahwa ini adalah komponen client-side
 
 import { useStoreModal } from "@/hooks/use-store-modal";
 import Modal from "../ui/modal";
@@ -13,14 +14,12 @@ const formSchema = z.object({
   name: z.string().min(1, "Nama toko harus diisi"),
 });
 
-const StoreModal = () => {
+export const StoreModal = () => {
   const storeModal = useStoreModal();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-    },
+    defaultValues: { name: "" },
   });
 
   const onSubmit = async (value: z.infer<typeof formSchema>) => {
@@ -44,21 +43,14 @@ const StoreModal = () => {
                 <FormItem>
                   <FormLabel>Nama Toko</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder="Nama Toko"
-                      {...field}
-                    />
+                    <Input placeholder="Nama Toko" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
             <div className="mt-4 flex justify-end gap-2">
-              <Button
-                type="button"
-                onClick={storeModal.onClose}
-                variant="secondary"
-              >
+              <Button type="button" onClick={storeModal.onClose} variant="outline">
                 Cancel
               </Button>
               <Button type="submit">Submit</Button>
@@ -69,5 +61,3 @@ const StoreModal = () => {
     </Modal>
   );
 };
-
-export default StoreModal;
