@@ -1,3 +1,4 @@
+import Navbar from "@/components/navbar";
 import db from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
@@ -34,8 +35,8 @@ export default async function DashboardLayout({
   // Render layout dashboard
   return (
     <>
-      <div>This is Navbar</div>
-      {children} {/* Gunakan children dengan benar */}
+      <Navbar />
+      {children} 
     </>
   );
 }

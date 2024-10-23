@@ -14,7 +14,7 @@ const DashboardPage = async ({ params }: DashboardPageProps) => {
 
     return (
         <div>
-            Active Store: {store?.name || "Store not found"} {/* Menangani jika store tidak ditemukan */}
+            Active Store: {store?.name || "Store not found"} 
         </div>
     );
 };
