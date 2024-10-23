@@ -106,7 +106,7 @@ const StoreSwitcher = ({ className, items = [] }: StoreSwitcherProps) => {
                 }}
               >
                 <PlusCircle className="mr-2 h-5 w-5" />
-                Buat Toko
+                Toko
               </CommandItem>
             </CommandGroup>
           </CommandList>
