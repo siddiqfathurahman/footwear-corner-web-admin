@@ -122,7 +122,7 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
             />
           </div>
           <Button disabled={loading} type="submit">
-            Simpan
+            Save
           </Button>
         </form>
       </Form>
