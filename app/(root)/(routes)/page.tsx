@@ -16,14 +16,9 @@ const SetupPage = () => {
     }
   }, [isOpen, onOpen]);
 
-  return (
-    <div className="p-4">
-      Root Page
-      <UserButton afterSignOutUrl="/" />
-      {/* Jika ingin menampilkan modal, tambahkan di sini */}
-      {/* <Modal isOpen={isOpen} onClose={onClose} /> */}
-    </div>
-  );
+  return null
+
+
 };
 
 export default SetupPage;
