@@ -39,7 +39,7 @@ export async function POST(
       return new NextResponse("Unauthorized", { status: 403 });
     }
 
-    const banner = await db.banner.create({
+    const banner = await db.store.create({
       data: {
         label,
         imageUrl,
