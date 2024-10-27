@@ -12,9 +12,9 @@ export default async function DashboardLayout({
   children,
   params,
 }: DashboardLayoutProps) {
-  const { userId } = auth(); // Ambil userId dari Clerk auth
+  const { userId } = auth(); 
 
-  // Jika userId tidak ada, redirect ke halaman sign-in
+  
   if (!userId) {
     redirect("/sign-in");
   }
