@@ -33,3 +33,4 @@ model Banner {
 
   @@index([storeId])
 }
+
