@@ -24,7 +24,7 @@ import toast from "react-hot-toast";
 import { useParams, useRouter } from "next/navigation";
 import { AlertModal } from "@/components/modals/alert-modal";
 import { useOrigin } from "@/hooks/use-origin";
-import ImageUpload from "@/components/ui/image-uplaud";
+import ImageUpload from "@/components/ui/image-upload";
 
 interface BannerFormProps {
   initialData: Banner | null;
