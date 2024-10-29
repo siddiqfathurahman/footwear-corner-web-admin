@@ -19,20 +19,19 @@ export default async function DashboardLayout({
     redirect("/sign-in");
   }
 
-  // Cari store berdasarkan id dan userId
+  
   const store = await db.store.findFirst({
     where: {
       id: params.storeId,
-      userid: userId, // Pastikan menggunakan userid sesuai dengan model Prisma
+      userid: userId, 
     },
   });
 
-  // Jika store tidak ditemukan, redirect ke home
+
   if (!store) {
     redirect("/");
   }
 
-  // Render layout dashboard
   return (
     <>
       <Navbar />
