@@ -26,7 +26,8 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   }, []);
 
   const onUpload = (result: any) => {
-    onChange(result.info.secure_url);
+    console.log("Uploaded URL:", result.info.secure_url); // Debugging line
+    onChange(result.info.secure_url); // Mengubah URL gambar
   };
 
   if (!isMounted) {
@@ -61,15 +62,32 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
             open();
           };
           return (
-            <Button
-              type="button"
-              disabled={disabled}
-              variant="secondary"
-              onClick={onClick}
-            >
-              <ImagePlus className="h-4 w-4 mr-2" />
-              Upload Image
-            </Button>
+            <>
+              <Button
+                type="button"
+                disabled={disabled}
+                variant="secondary"
+                onClick={onClick}
+              >
+                {value.length > 0 ? (
+                  value[0]
+                ) : (
+                  <>
+                    <ImagePlus className="h-4 w-4 mr-2" />
+                    Upload Image
+                  </>
+                )}
+              </Button>
+              {value.length > 0 && (
+                <input
+                  type="text"
+                  value={value[0]} // Menampilkan URL gambar yang diupload
+                  readOnly
+                  className="mt-2 w-full p-2 border rounded-md"
+                  placeholder="Uploaded Image URL"
+                />
+              )}
+            </>
           );
         }}
       </CldUploadWidget>

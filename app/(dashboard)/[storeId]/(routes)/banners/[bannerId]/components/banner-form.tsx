@@ -3,7 +3,6 @@
 import * as z from "zod";
 import { useState } from "react";
 import axios from "axios";
-
 import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
@@ -31,8 +30,8 @@ interface BannerFormProps {
 }
 
 const formSchema = z.object({
-  label: z.string().min(1),
-  imageUrl: z.string().min(1),
+  label: z.string().min(1, "Label tidak boleh kosong"),
+  imageUrl: z.string().min(1, "URL gambar tidak boleh kosong"),
 });
 
 type BannerFormValues = z.infer<typeof formSchema>;
@@ -153,7 +152,7 @@ export const BannerForm: React.FC<BannerFormProps> = ({ initialData }) => {
                       disabled={loading}
                       onChange={(url) => field.onChange(url)}
                       onRemove={() => field.onChange("")}
-                      value={field.value ? [field.value] : []}
+                      value={field.value ? [field.value] : []} // Menyimpan URL gambar
                     />
                   </FormControl>
                   <FormMessage />
