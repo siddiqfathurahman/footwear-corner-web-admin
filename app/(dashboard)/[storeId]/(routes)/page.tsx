@@ -13,10 +13,16 @@ const DashboardPage = async ({ params }: DashboardPageProps) => {
     });
 
     return (
-        <div>
-            Active Store: {store?.name || "Store not found"} 
+        <div className="flex items-center justify-center min-h-screen">
+            <div className="text-center">
+                <h1 className="font-extrabold text-7xl text-blue-800">Welcome Admin</h1>
+                <h2 className="font-semibold text-5xl mt-2">
+                    {store?.name || "Store not found"}
+                </h2>
+            </div>
         </div>
     );
+    
 };
 
 
