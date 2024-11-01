@@ -25,9 +25,23 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
     setIsMounted(true);
   }, []);
 
-  const onUpload = (result: any) => {
-    console.log("Uploaded URL:", result.info.secure_url); // Debugging line
-    onChange(result.info.secure_url); // Mengubah URL gambar
+  const onUpload = async (result: any) => {
+    const imageUrl = result.info.secure_url;
+    console.log("Uploaded URL:", imageUrl);
+    onChange(imageUrl); // Menambahkan URL ke dalam value
+    
+    // Mengirim URL ke API backend
+    try {
+      const response = await fetch('/api/save-image-url', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ imageUrl }), // Mengirim URL ke backend
+      });
+      const data = await response.json();
+      console.log("Response from server:", data);
+    } catch (error) {
+      console.error("Failed to save image URL:", error);
+    }
   };
 
   if (!isMounted) {
@@ -57,39 +71,17 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
         ))}
       </div>
       <CldUploadWidget onUpload={onUpload} uploadPreset="pd6ckpip">
-        {({ open }) => {
-          const onClick = () => {
-            open();
-          };
-          return (
-            <>
-              <Button
-                type="button"
-                disabled={disabled}
-                variant="secondary"
-                onClick={onClick}
-              >
-                {value.length > 0 ? (
-                  value[0]
-                ) : (
-                  <>
-                    <ImagePlus className="h-4 w-4 mr-2" />
-                    Upload Image
-                  </>
-                )}
-              </Button>
-              {value.length > 0 && (
-                <input
-                  type="text"
-                  value={value[0]} // Menampilkan URL gambar yang diupload
-                  readOnly
-                  className="mt-2 w-full p-2 border rounded-md"
-                  placeholder="Uploaded Image URL"
-                />
-              )}
-            </>
-          );
-        }}
+        {({ open }) => (
+          <Button
+            type="button"
+            disabled={disabled}
+            variant="secondary"
+            onClick={() => open()}
+          >
+            <ImagePlus className="h-4 w-4 mr-2" />
+            Upload Image
+          </Button>
+        )}
       </CldUploadWidget>
     </div>
   );
