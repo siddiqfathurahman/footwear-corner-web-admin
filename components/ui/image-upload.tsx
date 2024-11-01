@@ -25,22 +25,11 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
     setIsMounted(true);
   }, []);
 
-  const onUpload = async (result: any) => {
-    const imageUrl = result.info.secure_url;
-    console.log("Uploaded URL:", imageUrl);
-    onChange(imageUrl); // Menambahkan URL ke dalam value
-    
-    // Mengirim URL ke API backend
-    try {
-      const response = await fetch('/api/save-image-url', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ imageUrl }), // Mengirim URL ke backend
-      });
-      const data = await response.json();
-      console.log("Response from server:", data);
-    } catch (error) {
-      console.error("Failed to save image URL:", error);
+  const onUpload = (result: any) => {
+    if (result.info && result.info.secure_url) {
+      onChange(result.info.secure_url); // Pastikan secure_url diambil dengan benar
+    } else {
+      console.error("Upload failed or secure_url is missing.");
     }
   };
 
@@ -70,18 +59,27 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
           </div>
         ))}
       </div>
-      <CldUploadWidget onUpload={onUpload} uploadPreset="pd6ckpip">
-        {({ open }) => (
-          <Button
-            type="button"
-            disabled={disabled}
-            variant="secondary"
-            onClick={() => open()}
-          >
-            <ImagePlus className="h-4 w-4 mr-2" />
-            Upload Image
-          </Button>
-        )}
+      <CldUploadWidget
+        onUpload={onUpload}
+        uploadPreset="pd6ckpip"
+        options={{ resourceType: "image" }} // Sesuaikan opsi widget jika perlu
+      >
+        {({ open }) => {
+          const onClick = () => {
+            open();
+          };
+          return (
+            <Button
+              type="button"
+              disabled={disabled}
+              variant="secondary"
+              onClick={onClick}
+            >
+              <ImagePlus className="h-4 w-4 mr-2" />
+              Upload image
+            </Button>
+          );
+        }}
       </CldUploadWidget>
     </div>
   );
