@@ -27,7 +27,8 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
 
   const onUpload = (result: any) => {
     if (result.info && result.info.secure_url) {
-      onChange(result.info.secure_url); // Pastikan secure_url diambil dengan benar
+      console.log("Upload success:", result.info.secure_url);
+      onChange(result.info.secure_url);
     } else {
       console.error("Upload failed or secure_url is missing.");
     }
@@ -36,6 +37,9 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   if (!isMounted) {
     return null;
   }
+
+  console.log("Rendering ImageUpload component");
+  console.log("Current value:", value); // Log nilai value untuk debugging
 
   return (
     <div>
@@ -61,8 +65,8 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
       </div>
       <CldUploadWidget
         onUpload={onUpload}
-        uploadPreset="pd6ckpip"
-        options={{ resourceType: "image" }} // Sesuaikan opsi widget jika perlu
+        uploadPreset="pd6ckpip" // Pastikan uploadPreset ini benar dan tidak kosong
+        options={{ resourceType: "image" }}
       >
         {({ open }) => {
           const onClick = () => {
