@@ -11,7 +11,7 @@ const SetupPage = () => {
   const isOpen = useStoreModal((state) => state.isOpen);
 
   useEffect(() => {
-    if (!isOpen && typeof onOpen === 'function') { // Periksa apakah onOpen adalah fungsi
+    if (!isOpen && typeof onOpen === 'function') { 
       onOpen();
     }
   }, [isOpen, onOpen]);
